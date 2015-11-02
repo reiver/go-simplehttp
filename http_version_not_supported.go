@@ -11,7 +11,7 @@ func (responder *internalResponder) HTTPVersionNotSupported(w http.ResponseWrite
 	httpStatusCode := http.StatusHTTPVersionNotSupported
 	httpStatusName :=  StatusNameHTTPVersionNotSupported
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

@@ -11,7 +11,7 @@ func (responder *internalResponder) GatewayTimeout(w http.ResponseWriter, cascad
 	httpStatusCode := http.StatusGatewayTimeout
 	httpStatusName :=  StatusNameGatewayTimeout
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

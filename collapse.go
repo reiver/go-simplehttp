@@ -8,7 +8,7 @@ import (
 
 // collapse turns different kinds of data into a map[string]interface{}.
 // (Include structs.)
-func collapse(cascade ...interface{}) map[string]interface{} {
+func collapse(tagName string, cascade ...interface{}) map[string]interface{} {
 
 	// Deal with datum.
 	data := make(map[string]interface{})
@@ -74,7 +74,7 @@ func collapse(cascade ...interface{}) map[string]interface{} {
 		default:
 			reflectedValue := reflect.ValueOf(xx)
 
-			moreData := collapseReflectedValue(reflectedValue)
+			moreData := collapseReflectedValue(tagName, reflectedValue)
 
 			for key, value := range moreData {
 				data[key] = value
@@ -88,7 +88,7 @@ func collapse(cascade ...interface{}) map[string]interface{} {
 }
 
 
-func collapseReflectedValue(reflectedValue reflect.Value) map[string]interface{} {
+func collapseReflectedValue(tagName string, reflectedValue reflect.Value) map[string]interface{} {
 
 	// Initialize.
 	data := make(map[string]interface{})
@@ -97,12 +97,12 @@ func collapseReflectedValue(reflectedValue reflect.Value) map[string]interface{}
 	// Collapse.
 	switch reflectedValue.Kind() {
 	case reflect.Struct:
-		moreData := collapseReflectedStruct(reflectedValue)
+		moreData := collapseReflectedStruct(tagName, reflectedValue)
 		for k,v := range moreData {
 			data[k] = v
 		}
 	case reflect.Ptr:
-		moreData := collapseReflectedPtr(reflectedValue)
+		moreData := collapseReflectedPtr(tagName, reflectedValue)
 		for k,v := range moreData {
 			data[k] = v
 		}
@@ -116,7 +116,7 @@ func collapseReflectedValue(reflectedValue reflect.Value) map[string]interface{}
 }
 
 
-func collapseReflectedStruct(reflectedStruct reflect.Value) map[string]interface{} {
+func collapseReflectedStruct(tagName string, reflectedStruct reflect.Value) map[string]interface{} {
 
 	// Initialize.
 	data := make(map[string]interface{})
@@ -131,7 +131,10 @@ func collapseReflectedStruct(reflectedStruct reflect.Value) map[string]interface
 
 		fieldType := typeOfValue.Field(i)
 		fieldTypeTag := fieldType.Tag
-		key := fieldTypeTag.Get("json")
+		key := ""
+		if "" != tagName {
+			key = fieldTypeTag.Get(tagName)
+		}
 		if "" == key {
 			key = fieldType.Name
 		}
@@ -148,11 +151,11 @@ func collapseReflectedStruct(reflectedStruct reflect.Value) map[string]interface
 }
 
 
-func collapseReflectedPtr(reflectedPtr reflect.Value) map[string]interface{} {
+func collapseReflectedPtr(tagName string, reflectedPtr reflect.Value) map[string]interface{} {
 
 	reflectedValue := reflectedPtr.Elem()
 
-	data := collapseReflectedValue(reflectedValue)
+	data := collapseReflectedValue(tagName, reflectedValue)
 
 	return data
 }

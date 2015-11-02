@@ -11,7 +11,7 @@ func (responder *internalResponder) NotFound(w http.ResponseWriter, cascade ...i
 	httpStatusCode := http.StatusNotFound
 	httpStatusName :=  StatusNameNotFound
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

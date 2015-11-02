@@ -11,7 +11,7 @@ func (responder *internalResponder) RequestTimeout(w http.ResponseWriter, cascad
 	httpStatusCode := http.StatusRequestTimeout
 	httpStatusName :=  StatusNameRequestTimeout
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

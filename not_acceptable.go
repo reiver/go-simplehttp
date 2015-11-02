@@ -11,7 +11,7 @@ func (responder *internalResponder) NotAcceptable(w http.ResponseWriter, cascade
 	httpStatusCode := http.StatusNotAcceptable
 	httpStatusName :=  StatusNameNotAcceptable
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

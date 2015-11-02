@@ -11,7 +11,7 @@ func (responder *internalResponder) RequestURITooLong(w http.ResponseWriter, cas
 	httpStatusCode := http.StatusRequestURITooLong
 	httpStatusName :=  StatusNameRequestURITooLong
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

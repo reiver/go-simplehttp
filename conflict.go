@@ -11,7 +11,7 @@ func (responder *internalResponder) Conflict(w http.ResponseWriter, cascade ...i
 	httpStatusCode := http.StatusConflict
 	httpStatusName :=  StatusNameConflict
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

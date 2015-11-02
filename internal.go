@@ -9,7 +9,8 @@ import (
 
 
 type internalResponder struct {
-	driver simplehttpdriver.Responder
+	driverName  string
+	driver      simplehttpdriver.Responder
 	headers map[string][]string
 }
 
@@ -21,7 +22,10 @@ func Load(name string) (Responder, error) {
 		return nil, errors.New("Not Found")
 	}
 
-	return New(driver), nil
+	responder := New(driver)
+	responder.(*internalResponder).driverName = name
+
+	return responder, nil
 }
 
 

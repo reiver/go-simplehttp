@@ -11,7 +11,7 @@ func (responder *internalResponder) NotImplemented(w http.ResponseWriter, cascad
 	httpStatusCode := http.StatusNotImplemented
 	httpStatusName :=  StatusNameNotImplemented
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

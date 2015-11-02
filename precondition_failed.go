@@ -11,7 +11,7 @@ func (responder *internalResponder) PreconditionFailed(w http.ResponseWriter, ca
 	httpStatusCode := http.StatusPreconditionFailed
 	httpStatusName :=  StatusNamePreconditionFailed
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

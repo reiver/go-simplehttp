@@ -11,7 +11,7 @@ func (responder *internalResponder) Accepted(w http.ResponseWriter, cascade ...i
 	httpStatusCode := http.StatusAccepted
 	httpStatusName :=  StatusNameAccepted
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

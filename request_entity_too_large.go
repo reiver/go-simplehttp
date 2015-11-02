@@ -11,7 +11,7 @@ func (responder *internalResponder) RequestEntityTooLarge(w http.ResponseWriter,
 	httpStatusCode := http.StatusRequestEntityTooLarge
 	httpStatusName :=  StatusNameRequestEntityTooLarge
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

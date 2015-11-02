@@ -11,7 +11,7 @@ func (responder *internalResponder) UnsupportedMediaType(w http.ResponseWriter, 
 	httpStatusCode := http.StatusUnsupportedMediaType
 	httpStatusName :=  StatusNameUnsupportedMediaType
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

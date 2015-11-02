@@ -11,7 +11,7 @@ func (responder *internalResponder) PaymentRequired(w http.ResponseWriter, casca
 	httpStatusCode := http.StatusPaymentRequired
 	httpStatusName :=  StatusNamePaymentRequired
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

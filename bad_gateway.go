@@ -11,7 +11,7 @@ func (responder *internalResponder) BadGateway(w http.ResponseWriter, cascade ..
 	httpStatusCode := http.StatusBadGateway
 	httpStatusName :=  StatusNameBadGateway
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

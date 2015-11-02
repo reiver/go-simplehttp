@@ -11,7 +11,7 @@ func (responder *internalResponder) OK(w http.ResponseWriter, cascade ...interfa
 	httpStatusCode := http.StatusOK
 	httpStatusName :=  StatusNameOK
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

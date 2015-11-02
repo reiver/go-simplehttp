@@ -11,7 +11,7 @@ func (responder *internalResponder) ProxyAuthRequired(w http.ResponseWriter, cas
 	httpStatusCode := http.StatusProxyAuthRequired
 	httpStatusName :=  StatusNameProxyAuthRequired
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

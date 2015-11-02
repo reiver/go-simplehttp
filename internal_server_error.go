@@ -11,7 +11,7 @@ func (responder *internalResponder) InternalServerError(w http.ResponseWriter, c
 	httpStatusCode := http.StatusInternalServerError
 	httpStatusName :=  StatusNameInternalServerError
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }

@@ -11,11 +11,13 @@ import (
 func TestCollapse(t *testing.T) {
 
 	tests := []struct{
+		TagName       string
 		Cascade     []interface{}
 		Expected map[string]interface{}
 
 	}{
 		{
+			TagName:     "",
 			Cascade:     []interface{}{},
 			Expected: map[string]interface{}{},
 		},
@@ -23,6 +25,7 @@ func TestCollapse(t *testing.T) {
 
 
 		{
+			TagName: "",
 			Cascade: []interface{}{
 				map[string]string{
 				},
@@ -31,6 +34,7 @@ func TestCollapse(t *testing.T) {
 			},
 		},
 		{
+			TagName: "",
 			Cascade: []interface{}{
 				map[string]string{
 				},
@@ -41,59 +45,12 @@ func TestCollapse(t *testing.T) {
 			},
 		},
 		{
+			TagName: "",
 			Cascade: []interface{}{
 				map[string]string{
 				},
 				map[string]string{
 				},
-				map[string]string{
-				},
-			},
-			Expected: map[string]interface{}{
-			},
-		},
-
-
-
-		{
-			Cascade: []interface{}{
-				struct{}{},
-			},
-			Expected: map[string]interface{}{
-			},
-		},
-		{
-			Cascade: []interface{}{
-				struct{}{},
-				struct{}{},
-			},
-			Expected: map[string]interface{}{
-			},
-		},
-		{
-			Cascade: []interface{}{
-				struct{}{},
-				struct{}{},
-				struct{}{},
-			},
-			Expected: map[string]interface{}{
-			},
-		},
-
-
-
-		{
-			Cascade: []interface{}{
-				map[string]string{
-				},
-				struct{}{},
-			},
-			Expected: map[string]interface{}{
-			},
-		},
-		{
-			Cascade: []interface{}{
-				struct{}{},
 				map[string]string{
 				},
 			},
@@ -104,6 +61,60 @@ func TestCollapse(t *testing.T) {
 
 
 		{
+			TagName: "",
+			Cascade: []interface{}{
+				struct{}{},
+			},
+			Expected: map[string]interface{}{
+			},
+		},
+		{
+			TagName: "",
+			Cascade: []interface{}{
+				struct{}{},
+				struct{}{},
+			},
+			Expected: map[string]interface{}{
+			},
+		},
+		{
+			TagName: "",
+			Cascade: []interface{}{
+				struct{}{},
+				struct{}{},
+				struct{}{},
+			},
+			Expected: map[string]interface{}{
+			},
+		},
+
+
+
+		{
+			TagName: "",
+			Cascade: []interface{}{
+				map[string]string{
+				},
+				struct{}{},
+			},
+			Expected: map[string]interface{}{
+			},
+		},
+		{
+			TagName: "",
+			Cascade: []interface{}{
+				struct{}{},
+				map[string]string{
+				},
+			},
+			Expected: map[string]interface{}{
+			},
+		},
+
+
+
+		{
+			TagName: "",
 			Cascade: []interface{}{
 				map[string]string{
 					"apple":"one",
@@ -114,6 +125,7 @@ func TestCollapse(t *testing.T) {
 			},
 		},
 		{
+			TagName: "",
 			Cascade: []interface{}{
 				map[string]string{
 					"apple":"one",
@@ -128,6 +140,7 @@ func TestCollapse(t *testing.T) {
 			},
 		},
 		{
+			TagName: "",
 			Cascade: []interface{}{
 				map[string]string{
 					"apple":"one",
@@ -149,6 +162,7 @@ func TestCollapse(t *testing.T) {
 
 
 		{
+			TagName: "json",
 			Cascade: []interface{}{
 			struct{
 					Apple  string `json:"apple"`
@@ -161,6 +175,7 @@ func TestCollapse(t *testing.T) {
 			},
 		},
 		{
+			TagName: "json",
 			Cascade: []interface{}{
 				struct{
 					Apple  string `json:"apple"`
@@ -179,6 +194,7 @@ func TestCollapse(t *testing.T) {
 			},
 		},
 		{
+			TagName: "json",
 			Cascade: []interface{}{
 				struct{
 					Apple  string `json:"apple"`
@@ -206,6 +222,7 @@ func TestCollapse(t *testing.T) {
 
 
 		{
+			TagName: "",
 			Cascade: []interface{}{
 				map[string]string{
 					"apple":"one",
@@ -228,6 +245,7 @@ func TestCollapse(t *testing.T) {
 			},
 		},
 		{
+			TagName: "",
 			Cascade: []interface{}{
 				map[string]string{
 					"apple":"one",
@@ -245,6 +263,7 @@ func TestCollapse(t *testing.T) {
 
 
 		{
+			TagName: "json",
 			Cascade: []interface{}{
 				struct{
 					Apple string `json:"apple"`
@@ -257,6 +276,7 @@ func TestCollapse(t *testing.T) {
 			},
 		},
 		{
+			TagName: "json",
 			Cascade: []interface{}{
 				struct{
 					Apple  string `json:"apple"`
@@ -272,6 +292,7 @@ func TestCollapse(t *testing.T) {
 			},
 		},
 		{
+			TagName: "json",
 			Cascade: []interface{}{
 				struct{
 					Apple  string `json:"apple"`
@@ -293,6 +314,7 @@ func TestCollapse(t *testing.T) {
 
 
 		{
+			TagName: "json",
 			Cascade: []interface{}{
 				struct{
 					Apple  string `json:"apple"`
@@ -318,6 +340,7 @@ func TestCollapse(t *testing.T) {
 
 
 		{
+			TagName: "json",
 			Cascade: []interface{}{
 				struct{
 					Apple  string `json:"apple"`
@@ -352,6 +375,7 @@ func TestCollapse(t *testing.T) {
 
 
 		{
+			TagName: "",
 			Cascade: []interface{}{
 				map[string]interface{}{
 					"aardvark":"one",
@@ -370,6 +394,7 @@ func TestCollapse(t *testing.T) {
 			},
 		},
 		{
+			TagName: "json",
 			Cascade: []interface{}{
 				map[string]interface{}{
 					"aardvark":"one",
@@ -393,6 +418,7 @@ func TestCollapse(t *testing.T) {
 			},
 		},
 		{
+			TagName: "json",
 			Cascade: []interface{}{
 				map[string]interface{}{
 					"aardvark":"one",
@@ -424,7 +450,7 @@ func TestCollapse(t *testing.T) {
 
 
 	for testNumber, test := range tests {
-		collapsed := collapse(test.Cascade...)
+		collapsed := collapse(test.TagName, test.Cascade...)
 
 
 		if expected, actual := test.Expected, collapsed; !reflect.DeepEqual(expected, actual) {

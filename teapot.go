@@ -11,7 +11,7 @@ func (responder *internalResponder) Teapot(w http.ResponseWriter, cascade ...int
 	httpStatusCode := http.StatusTeapot
 	httpStatusName :=  StatusNameTeapot
 
-	data := collapse(cascade...)
+	data := collapse(responder.driverName, cascade...)
 
 	responder.driver.Respond(w, httpStatusCode, httpStatusName, responder.headers, data)
 }
